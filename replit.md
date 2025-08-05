@@ -12,14 +12,14 @@ Preferred communication style: Simple, everyday language.
 
 ### Frontend Architecture
 
-The client-side application is built using **React** with **TypeScript** and follows a component-driven architecture:
+The client-side application is built as a **static React application** with **TypeScript** and follows a component-driven architecture:
 
 - **UI Framework**: React with TypeScript for type safety and modern component patterns
 - **Styling**: Tailwind CSS with a custom design system featuring NGO-specific color palette (orange, blue, green themes)
 - **Component Library**: Shadcn/ui components providing consistent, accessible UI elements
 - **Routing**: Wouter for lightweight client-side routing
-- **State Management**: TanStack React Query for server state management and caching
 - **Form Handling**: React Hook Form with Zod validation for type-safe form processing
+- **Static Data**: All content is embedded directly in components for a truly static website
 
 The frontend follows a single-page application (SPA) pattern with modular components organized by feature:
 - `components/` - Reusable UI components and page sections
@@ -27,39 +27,32 @@ The frontend follows a single-page application (SPA) pattern with modular compon
 - `hooks/` - Custom React hooks for shared logic
 - `lib/` - Utility functions and configuration
 
-### Backend Architecture
+### Static Website Architecture
 
-The server-side application uses **Express.js** with **TypeScript** in an ESM module setup:
+This is now a **frontend-only static website** with the following characteristics:
 
-- **API Framework**: Express.js with RESTful endpoints for contact submissions and news retrieval
-- **Request Handling**: JSON body parsing with comprehensive error handling and logging middleware
-- **Development Environment**: Vite middleware integration for seamless development experience
-- **Static Serving**: Production-ready static file serving with Vite build output
+- **No Backend**: All data is hardcoded within React components
+- **Static Content**: News articles, testimonials, and organizational information are embedded in the codebase
+- **Form Handling**: Contact form provides user feedback but does not persist data
+- **Build Output**: Generates static HTML, CSS, and JavaScript files for hosting
+- **Development**: Uses Vite development server for local development and hot reloading
 
-The backend implements a simple layered architecture:
-- **Routes** (`server/routes.ts`) - API endpoint definitions and request/response handling
-- **Storage Layer** (`server/storage.ts`) - Data access abstraction with in-memory implementation
-- **Server Configuration** (`server/index.ts`) - Express app setup, middleware, and error handling
+### Data Management
 
-### Data Storage Solutions
+The application uses **static data structures** within React components:
 
-The application uses a **PostgreSQL** database accessed through **Drizzle ORM**:
-
-- **Database**: PostgreSQL with Neon serverless hosting
-- **ORM**: Drizzle ORM for type-safe database operations and migrations
-- **Schema Management**: Centralized schema definitions in `shared/schema.ts` with Zod validation
-- **Development Storage**: In-memory storage implementation for development/testing
-
-Database schema includes:
-- **Contacts**: User inquiries and contact form submissions
-- **News Articles**: Dynamic content management for organizational updates
+- **News Articles**: Hardcoded array of news items with titles, excerpts, images, and dates
+- **Contact Information**: Static organization details embedded in components
+- **Program Information**: Hardcoded program descriptions and features
+- **Impact Statistics**: Static numbers and metrics displayed in components
 
 ### Authentication and Authorization
 
-Currently implements a **public-facing** architecture without user authentication:
+Implements a **public-facing static website** architecture:
 - All content is publicly accessible
-- Contact form submissions are stored without user accounts
-- Admin functionality is implicit through direct database access
+- No user authentication required
+- Contact form provides feedback but doesn't store data
+- Fully client-side application suitable for static hosting
 
 ### Build and Development Tools
 
